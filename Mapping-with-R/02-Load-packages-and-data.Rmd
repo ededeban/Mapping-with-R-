@@ -1,0 +1,55 @@
+# Load data and packages {#cross}
+
+This section is to load the packages and extract the data. 
+
+
+## Install packages
+
+Here you will need the following packages: 
+
+- ```ggplot```
+- ```sf```
+- ```data.table```
+- ```cowplot```
+- ```rnaturalearth```
+- ```dplyr```
+- ```ggspatial```
+- ```gganimate```
+- ```png```
+- ```leaflet```
+- ```rnaturalearthdata``` with ```devtools::install_github("ropensci/rnaturalearthdata")```
+
+To install packages: 
+use ```install.packages("name of package")``` 
+
+
+
+```{r echo = FALSE, message = FALSE, warning=FALSE, results='hide'}
+#load packages
+libs <- c('ggplot2', "data.table", "dplyr", "cowplot", 
+          "rnaturalearth", "rnaturalearthdata",
+          "ggspatial", "sf")
+lapply(libs, require, character.only = TRUE)
+
+```
+
+## Load the dataset
+
+```{r}
+birdsurvey <- fread("Birdsurvey_2011_2021.csv")
+
+```
+
+Check if we have the right period from 2011 to 2021
+```{r}
+min(birdsurvey$year)
+max(birdsurvey$year)
+
+```
+
+Check the number of species and the type of species
+```{r}
+uniqueN(birdsurvey$species)
+unique(birdsurvey$species)
+
+```

@@ -1,11 +1,9 @@
-# Hello bookdown 
+# - Data for this manual 
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+In this **manual**, we are going to use two types of open access datasets.
 
-## A section
+* Shapefiles from Natural earth (https://www.naturalearthdata.com/) which is a public domain map dataset available at different scales with a lot of free vector and raster. The R package to hold and facilitate interaction with Natural Earth map data is ```rnaturalearth```. 
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
 
-### An unnumbered section {-}
-
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
+* Data from Global Biodiversity Information Facility (https://www.gbif.org/fr/). Here we are going to use the eBird dataset (https://www.gbif.org/fr/dataset/4fa7b334-ce0d-4e88-aaae-2e0c138d049e). Managed by the Cornell Lab of Ornithology eBird’s goal is to increase data quantity through participant recruitment and engagement globally, but also to quantify and control for data quality issues such as observer variability, imperfect detection of species, and both spatial and temporal bias in data collection. 
+- Here we are going to use data extracted from eBird Canada survey between 2011 and 2021. And we will only data from 10 breeding bird species in Newfoundland.
