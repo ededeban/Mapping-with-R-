@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Create GIF animation | Making maps for conservation - GIF and interactive maps</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook," />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Create GIF animation | Making maps for conservation - GIF and interactive maps" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook," />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Create GIF animation | Making maps for conservation - GIF and interactive maps" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook," />
+  
+
+<meta name="author" content="Emilie Dedeban" />
+
+
+<meta name="date" content="2022-04-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="import-background-basemap.html"/>
+<link rel="next" href="create-interactive-map.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="2" data-path="data-for-this-manual.html"><a href="data-for-this-manual.html"><i class="fa fa-check"></i><b>2</b> Data for this manual<span></span></a></li>
+<li class="chapter" data-level="3" data-path="load-data-and-packages.html"><a href="load-data-and-packages.html"><i class="fa fa-check"></i><b>3</b> Load data and packages<span></span></a><ul>
+<li class="chapter" data-level="3.1" data-path="load-data-and-packages.html"><a href="load-data-and-packages.html#install-packages"><i class="fa fa-check"></i><b>3.1</b> Install packages<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="load-data-and-packages.html"><a href="load-data-and-packages.html#load-the-dataset"><i class="fa fa-check"></i><b>3.2</b> Load the dataset<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="import-background-basemap.html"><a href="import-background-basemap.html"><i class="fa fa-check"></i><b>4</b> Import background basemap<span></span></a></li>
+<li class="chapter" data-level="5" data-path="create-gif-animation.html"><a href="create-gif-animation.html"><i class="fa fa-check"></i><b>5</b> Create GIF animation<span></span></a></li>
+<li class="chapter" data-level="6" data-path="create-interactive-map.html"><a href="create-interactive-map.html"><i class="fa fa-check"></i><b>6</b> Create interactive map<span></span></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Making maps for conservation - GIF and interactive maps</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="create-gif-animation" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 5</span> Create GIF animation<a href="create-gif-animation.html#create-gif-animation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>1) Create static map</strong></p>
+<p>Let’s use the previous script map from NL with zoom on Newfoundland island
+Before running this, you need to have created “map_nl”, see Import background basemap <a href="link">Import background basemap</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> map_nl, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="st">  </span><span class="co"># We can add an ENTIRELY new data set inside a geom</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> birdsurvey,</a>
+<a class="sourceLine" id="cb1-6" title="6">             <span class="kw">aes</span>(<span class="dt">x =</span> decimalLongitude,</a>
+<a class="sourceLine" id="cb1-7" title="7">                 <span class="dt">y =</span> decimalLatitude),</a>
+<a class="sourceLine" id="cb1-8" title="8">             <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
+<a class="sourceLine" id="cb1-9" title="9">             <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="dt">title =</span> <span class="st">&quot;Bird survey between 2002 and 2021&quot;</span></a>
+<a class="sourceLine" id="cb1-12" title="12">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="st">  </span><span class="co"># Zoom in to a specific view</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">60</span>, <span class="dv">-52</span>), </a>
+<a class="sourceLine" id="cb1-16" title="16">           <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">46</span>, <span class="dv">52</span>))</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><strong>2) Subset species and period</strong></p>
+<p><em>Bubo scandiacus</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">Bubo &lt;-<span class="st"> </span><span class="kw">subset</span>(birdsurvey, species <span class="op">==</span><span class="st"> &#39;Bubo scandiacus&#39;</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">Bubo_<span class="dv">2011</span>_<span class="dv">2021</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(Bubo, year <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2011</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2021</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">### Plot Bubo distribution only</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> map_nl, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="st">  </span><span class="co"># We can add an ENTIRELY new data set inside a geom</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> Bubo_<span class="dv">2011</span>_<span class="dv">2021</span>,</a>
+<a class="sourceLine" id="cb3-7" title="7">             <span class="kw">aes</span>(<span class="dt">x =</span> decimalLongitude,</a>
+<a class="sourceLine" id="cb3-8" title="8">                 <span class="dt">y =</span> decimalLatitude),</a>
+<a class="sourceLine" id="cb3-9" title="9">             <span class="dt">alpha =</span> <span class="fl">0.8</span>,</a>
+<a class="sourceLine" id="cb3-10" title="10">             <span class="dt">size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb3-11" title="11">             <span class="dt">colour =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="dt">title =</span> <span class="st">&quot;Snowy owl survey between 2011 and 2021&quot;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="st">  </span><span class="co"># Zoom in to a specific view</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">60</span>, <span class="dv">-52</span>), </a>
+<a class="sourceLine" id="cb3-18" title="18">           <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">46</span>, <span class="dv">52</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="st">           </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><strong>2) Create GIF by year</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">### Create a ggplot + add specific gganimate function = transition_time </span></a>
+<a class="sourceLine" id="cb4-2" title="2">plot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>()  <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> map_nl, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="co"># We can add an ENTIRELY new data set inside a geom</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> Bubo,</a>
+<a class="sourceLine" id="cb4-6" title="6">             <span class="kw">aes</span>(<span class="dt">x =</span> decimalLongitude,</a>
+<a class="sourceLine" id="cb4-7" title="7">                 <span class="dt">y =</span> decimalLatitude,</a>
+<a class="sourceLine" id="cb4-8" title="8">                 <span class="dt">color =</span> <span class="kw">as.factor</span>(year)),</a>
+<a class="sourceLine" id="cb4-9" title="9">             <span class="dt">alpha =</span> <span class="fl">0.8</span>,</a>
+<a class="sourceLine" id="cb4-10" title="10">             <span class="dt">size =</span> <span class="fl">3.5</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="st">  </span><span class="kw">transition_time</span>(year) <span class="op">+</span><span class="st"> </span><span class="co">#### this will allow us to get one image of data by year</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb4-13" title="13">    <span class="dt">title =</span> <span class="st">&quot;Bird survey between 2002 and 2021&quot;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="st">  </span><span class="co"># Zoom in to a specific view</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">60</span>, <span class="dv">-52</span>), </a>
+<a class="sourceLine" id="cb4-18" title="18">           <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">46</span>, <span class="dv">52</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Year: {frame_time}&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">##### Add scale bar and north arrow</span></a>
+<a class="sourceLine" id="cb5-2" title="2">plot1 &lt;-<span class="st"> </span>plot1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">annotation_scale</span>(<span class="dt">location =</span> <span class="st">&quot;tl&quot;</span>, <span class="dt">width_hint =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">annotation_north_arrow</span>(<span class="dt">location =</span> <span class="st">&quot;tr&quot;</span>, <span class="dt">which_north =</span> <span class="st">&quot;true&quot;</span>, </a>
+<a class="sourceLine" id="cb5-5" title="5">                         <span class="dt">height =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>), <span class="dt">width =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>),</a>
+<a class="sourceLine" id="cb5-6" title="6">                         <span class="dt">pad_x =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;cm&quot;</span>), <span class="dt">pad_y =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;cm&quot;</span>),</a>
+<a class="sourceLine" id="cb5-7" title="7">                         <span class="dt">style =</span> north_arrow_fancy_orienteering) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;aliceblue&quot;</span>),</a>
+<a class="sourceLine" id="cb5-10" title="10">        <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">######  This part will create the gif </span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">animate</span>(plot1, <span class="dt">nframes =</span> <span class="dv">10</span>, <span class="dt">duration =</span> <span class="dv">15</span>) <span class="co">### nframes = is the number of frames/images we want (here, one by year = 10 years) /  duration is the duration of the gif, here 15 secondes</span></a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.gif" /><!-- --></p>
+<p>Add the Snowy owl data</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Other marker types, but circles are the simplest to use</span></a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">leaflet</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw">addCircleMarkers</span>(<span class="dt">data =</span> Bubo, <span class="dt">lng =</span> Bubo<span class="op">$</span>decimalLongitude, <span class="dt">lat =</span> Bubo<span class="op">$</span>decimalLatitude) </a></code></pre></div>
+<div id="htmlwidget-477e20e30f3463e8f513" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-477e20e30f3463e8f513">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[47.521603,47.58035,46.69182,46.65509,46.65509,46.65509,46.66878,46.69182,49.241787,46.64835,46.64835,46.65132,51.46919,49.254707,46.66878,46.65509,46.64328,49.932846,46.66001,46.65509,46.65509,46.640015,46.66001,46.66001,46.640015,46.65398,49.241787,46.66001,49.363037,48.16655,46.66001,51.021603,51.442398,49.241787,46.65398,46.687073,46.64328,46.65206,46.66878,46.640015,46.65509,48.464912,46.639927,46.632256,46.660416,47.24684,46.66001,46.66001,49.241787,46.65509,46.768696,47.521603,49.254707,47.7634,46.66001,46.66225,46.65132,47.707787,46.65132,46.687073,46.66001,47.58035,47.521603,46.66001,46.632256,46.66001,47.58035,46.65509,46.658558,51.021603,46.65398,51.55861,46.64328,46.65509,46.66001,46.64835,47.521603,51.53873,46.632256,46.65132,46.640015,51.53873,46.64835,46.65132,46.727623,46.727623,47.521603,46.64328,46.64835,46.66878,47.521603,46.768696,46.768696,46.71068,46.64478,46.66878,46.64478,48.700733,46.640015,46.649643,51.442398,46.66878,46.649643,47.509895,46.64835,46.727623,49.6822,46.66001,46.66878,46.65132,46.66878,46.64835,46.64835,49.259346,47.121742,51.442398,47.31027,47.583675,47.583675,47.583675,47.521603,46.743866,47.690327,46.768696,46.66878,46.823875,49.685856,46.66001,46.649643,46.823875,47.574383,51.442398,46.65509,46.66878,46.649643,46.65509,49.013554,46.649643,46.6414,46.66878,51.728493,46.768696,46.74058,46.65509,46.65509,49.363037,47.521603,46.823875,51.957153,46.65509,46.65509,46.823875,46.65509,49.363037,46.64328,46.66878,46.66878,46.66878,46.823875,47.54571,49.681816,49.45147,46.730713,51.47577,49.372295,48.658325,48.661415,48.700733,49.392986,46.823875,47.521603,46.66878,48.47179,51.442398,46.768696,47.578747,47.521603,46.66001,47.521603,49.363037,46.768696,46.672398,48.545536,47.521603,46.64478,46.65509,47.57156,46.66001,47.521603,46.65132,46.66001,46.65509,47.578747,47.448917,47.448917,51.442398,46.768696,46.65509,46.65509,47.584976,47.521603,46.65132,46.768696,47.521603,46.65509,47.521603,47.584976,47.521603,47.521603,46.66001,51.442398,47.521603,46.645123,47.509895,46.65509,51.442398,49.392986,46.65509,46.66001,46.65509,46.65509,47.57156,47.521603,47.521603,46.66001,46.66878,46.65509,46.65509,49.363037,46.65509,46.65509,46.66001,46.65509,46.65509,46.65509,47.521603,46.65509,47.521603,58.06342,51.732876,47.880135,46.66878,51.481354,49.012543,51.442398,46.65132,46.66878,47.521603,46.66878,46.823875,58.600697,58.388706,58.424538,58.456406,59.24087,46.61671,47.521603,46.65509,46.64802,46.65509,46.65509,46.904827,47.521603,51.56808,46.66878,46.64478,46.66878,46.64802,46.64478,46.66878,46.66878,51.49474,46.632256,46.66878,46.72174,46.65509,46.65509,46.71068,46.66878,46.65509,46.71068,46.65509,47.452065,49.318954,46.65509,51.744835,46.66878,47.452065,47.452065,46.64478,46.66878,46.66878,46.64478,46.66878,46.66878,46.66878,47.57857,46.64478,46.743866,49.363037,49.363037,47.489777,51.47577,47.521603,51.480312,47.57088,47.58541,49.39405,49.363037,47.521603,47.521603,46.66878,47.521603,46.65132,46.66878,47.521603,47.521603,47.521603,47.521603,47.521603,49.363037,47.521603,47.509895,49.373806,47.521603,46.66878,46.65509,46.66878,46.65509,49.203747,46.66878,46.65509,49.363037,49.363037,51.442398,49.363037,49.363037,51.442398,51.442398,46.823875,46.65132,46.65132,46.65509,47.521603,46.72174,46.72174,46.72174,46.823875,46.61671,46.61671,46.61671,46.66225,46.66878,46.645123,46.65509,46.65509,46.65509,47.01726,47.521603,46.645123,46.743866,47.521603,47.521603,47.521603,46.65509,46.65509,47.521603,51.4609,46.65132,51.442398,46.66001,47.56994,46.66001,46.65509,49.298264,49.298264,46.79087,46.79087,46.71962,46.65509,46.65509,46.61671,46.66001,46.64478,46.714893,46.65509,46.65132,46.65509,46.65132,49.318954,48.959774,46.65509,46.66001,46.65509,46.65509,46.65509,46.699787,46.65509,46.65509,46.66878,46.743626,46.66878,46.65509,46.65509,46.743626,49.363037,51.4609,46.66878,46.66878,46.65509,46.65509,46.65509,46.65509,46.645123,46.65509,46.65509,46.64481,46.65509,46.65509,46.65509,46.65509,46.65509,47.573803,51.487476,47.301903,49.246002,49.363037,47.580723,46.823875,47.69091,51.321835,46.823875,46.823875,46.823875,46.823875,46.65509,47.521603,46.65509,49.226173,46.727623,46.61671,46.65509,46.61671,46.64481,46.823875,46.71015,46.61671,46.65509,46.823875,46.730713,46.730713,46.61671,46.823875,46.823875,46.764584,46.632256,46.920216,49.358677,46.66001,47.58025,46.65509,46.672398,47.020832,47.216885,46.687073,46.687073,46.687073,46.672398,46.65509,46.640015,46.823875,49.250774,49.250774,49.394886,49.394886,46.768696,46.768696,46.768696,46.768696,47.58025,47.651165,47.521603,47.521603,47.521603,47.521603,47.551952,47.573803,46.66001,46.61671,46.66001,46.61671,46.640015,46.61671,46.66001,47.521603,47.58025,47.58025,46.632256,49.363037,47.59492,47.620514,47.5223,49.920593,47.5223,47.578747,47.521603,46.65509,47.56998,46.66001,46.65509,46.640015,47.521603,46.651245,47.521603,46.65509,46.632256,46.61671,47.521603,47.521603,47.590076,47.590076,53.43732,49.403694,47.590076,47.58898,46.66001,46.66001,47.590076,46.69231,46.730713,47.521603,49.784,57.83707,46.65509,46.640305,53.300724,49.07916,52.939224,52.939224],[-52.624683,-52.72197,-53.485695,-53.22258,-53.22258,-53.22258,-53.522987,-53.485695,-53.484127,-53.165844,-53.165844,-53.092632,-56.84047,-53.465855,-53.522987,-53.22258,-53.11769,-57.74555,-53.074024,-53.22258,-53.22258,-53.138268,-53.074024,-53.074024,-53.138268,-53.217533,-53.484127,-53.074024,-53.69216,-52.938835,-53.074024,-57.095432,-56.960293,-53.484127,-53.217533,-53.260162,-53.11769,-53.21047,-53.522987,-53.138268,-53.22258,-59.267487,-53.13766,-53.58789,-53.076443,-52.80604,-53.074024,-53.074024,-53.484127,-53.22258,-53.171513,-52.624683,-53.465855,-53.983818,-53.074024,-53.240627,-53.092632,-52.72892,-53.092632,-53.260162,-53.074024,-52.72197,-52.624683,-53.074024,-53.58789,-53.074024,-52.72197,-53.22258,-53.07419,-57.095432,-53.217533,-56.80056,-53.11769,-53.22258,-53.074024,-53.165844,-52.624683,-55.715237,-53.58789,-53.092632,-53.138268,-55.715237,-53.165844,-53.092632,-53.423767,-53.423767,-52.624683,-53.11769,-53.165844,-53.522987,-52.624683,-53.171513,-53.171513,-53.47269,-53.607487,-53.522987,-53.607487,-53.086174,-53.138268,-53.181557,-56.960293,-53.522987,-53.181557,-52.63232,-53.165844,-53.423767,-57.956314,-53.074024,-53.522987,-53.092632,-53.522987,-53.165844,-53.165844,-53.527237,-53.7056,-56.960293,-53.98987,-52.763145,-52.763145,-52.763145,-52.624683,-53.55896,-53.242783,-53.171513,-53.522987,-54.187794,-57.760117,-53.074024,-53.181557,-54.187794,-52.685795,-56.960293,-53.22258,-53.522987,-53.181557,-53.22258,-57.60132,-53.181557,-53.1258,-53.522987,-56.494324,-53.171513,-53.38557,-53.22258,-53.22258,-53.69216,-52.624683,-54.187794,-57.090378,-53.22258,-53.22258,-54.187794,-53.22258,-53.69216,-53.11769,-53.522987,-53.522987,-53.522987,-54.187794,-52.688282,-57.707165,-53.959007,-53.369095,-56.8758,-53.735332,-53.097782,-53.061928,-53.086174,-53.77181,-54.187794,-52.624683,-53.522987,-53.235905,-56.960293,-53.171513,-52.7317,-52.624683,-53.074024,-52.624683,-53.69216,-53.171513,-53.242577,-58.63575,-52.624683,-53.607487,-53.22258,-52.697815,-53.074024,-52.624683,-53.092632,-53.074024,-53.22258,-52.7317,-52.82377,-52.82377,-56.960293,-53.171513,-53.22258,-53.22258,-52.68986,-52.624683,-53.092632,-53.171513,-52.624683,-53.22258,-52.624683,-52.68986,-52.624683,-52.624683,-53.074024,-56.960293,-52.624683,-53.103535,-52.63232,-53.22258,-56.960293,-53.77181,-53.22258,-53.074024,-53.22258,-53.22258,-52.697815,-52.624683,-52.624683,-53.074024,-53.522987,-53.22258,-53.22258,-53.69216,-53.22258,-53.22258,-53.074024,-53.22258,-53.22258,-53.22258,-52.624683,-53.22258,-52.624683,-63.211597,-56.42578,-54.677197,-53.522987,-56.830368,-57.60255,-56.960293,-53.092632,-53.522987,-52.624683,-53.522987,-54.187794,-63.086964,-63.171036,-62.768867,-62.80891,-64.21954,-53.530968,-52.624683,-53.22258,-53.49964,-53.22258,-53.22258,-55.457462,-52.624683,-55.7516,-53.522987,-53.607487,-53.522987,-53.49964,-53.607487,-53.522987,-53.522987,-56.87282,-53.58789,-53.522987,-53.437157,-53.22258,-53.22258,-53.47269,-53.522987,-53.22258,-53.47269,-53.22258,-52.801666,-53.610962,-53.22258,-57.1038,-53.522987,-52.801666,-52.801666,-53.607487,-53.522987,-53.522987,-53.607487,-53.522987,-53.522987,-53.522987,-52.67601,-53.607487,-53.55896,-53.69216,-53.69216,-52.788704,-56.8758,-52.624683,-56.90991,-52.7396,-52.71768,-53.775288,-53.69216,-52.624683,-52.624683,-53.522987,-52.624683,-53.092632,-53.522987,-52.624683,-52.624683,-52.624683,-52.624683,-52.624683,-53.69216,-52.624683,-52.63232,-53.715164,-52.624683,-53.522987,-53.22258,-53.522987,-53.22258,-53.514942,-53.522987,-53.22258,-53.69216,-53.69216,-56.960293,-53.69216,-53.69216,-56.960293,-56.960293,-54.187794,-53.092632,-53.092632,-53.22258,-52.624683,-53.437157,-53.437157,-53.437157,-54.187794,-53.530968,-53.530968,-53.530968,-53.240627,-53.522987,-53.103535,-53.22258,-53.22258,-53.22258,-52.85748,-52.624683,-53.103535,-53.55896,-52.624683,-52.624683,-52.624683,-53.22258,-53.22258,-52.624683,-56.98576,-53.092632,-56.960293,-53.074024,-52.72902,-53.074024,-53.22258,-53.60504,-53.60504,-53.08418,-53.08418,-53.51299,-53.22258,-53.22258,-53.530968,-53.074024,-53.607487,-53.50498,-53.22258,-53.092632,-53.22258,-53.092632,-53.610962,-58.29925,-53.22258,-53.074024,-53.22258,-53.22258,-53.22258,-53.060318,-53.22258,-53.22258,-53.522987,-53.2806,-53.522987,-53.22258,-53.22258,-53.2806,-53.69216,-56.98576,-53.522987,-53.522987,-53.22258,-53.22258,-53.22258,-53.22258,-53.103535,-53.22258,-53.22258,-53.11349,-53.22258,-53.22258,-53.22258,-53.22258,-53.22258,-52.728897,-56.92673,-53.98808,-53.501183,-53.69216,-52.709034,-54.187794,-52.760555,-56.712112,-54.187794,-54.187794,-54.187794,-54.187794,-53.22258,-52.624683,-53.22258,-53.50595,-53.423767,-53.530968,-53.22258,-53.530968,-53.11349,-54.187794,-53.472862,-53.530968,-53.22258,-54.187794,-53.369095,-53.369095,-53.530968,-54.187794,-54.187794,-53.603756,-53.58789,-55.391956,-53.715763,-53.074024,-52.710342,-53.22258,-53.242577,-52.889317,-52.850517,-53.260162,-53.260162,-53.260162,-53.242577,-53.22258,-53.138268,-54.187794,-53.530884,-53.530884,-53.792496,-53.792496,-53.171513,-53.171513,-53.171513,-53.171513,-52.710342,-52.682762,-52.624683,-52.624683,-52.624683,-52.624683,-52.718945,-52.728897,-53.074024,-53.530968,-53.074024,-53.530968,-53.138268,-53.530968,-53.074024,-52.624683,-52.710342,-52.710342,-53.58789,-53.69216,-52.709038,-59.302826,-57.395668,-57.819862,-57.395668,-52.7317,-52.624683,-53.22258,-52.6971,-53.074024,-53.22258,-53.138268,-52.624683,-53.105076,-52.624683,-53.22258,-53.58789,-53.530968,-52.624683,-52.624683,-52.712376,-52.712376,-58.964535,-54.28552,-52.712376,-52.71048,-53.074024,-53.074024,-52.712376,-53.402073,-53.369095,-52.624683,-57.85709,-63.83038,-53.22258,-53.138382,-60.38798,-57.483597,-66.90623,-66.90623],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[46.61671,59.24087],"lng":[-66.90623,-52.624683]}},"evals":[],"jsHooks":[]}</script>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="import-background-basemap.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="create-interactive-map.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-Create-GIF-animation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

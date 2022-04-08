@@ -1,0 +1,152 @@
+# Create interactive map
+
+To learn about leaflet functions: (https://rstudio.github.io/leaflet/)
+
+Utility to interactive maps: 
+- 
+- 
+- 
+
+```{r echo = FALSE, message = FALSE, warning=FALSE, results='hide'}
+libs <- c('rnaturalearth', "rnaturalearthdata", "rgeos", "sf", "data.table", "ggplot2", "gganimate", "png", 'leaflet', 'dplyr')
+lapply(libs, require, character.only = TRUE)
+canada_map <- ne_states(country = 'canada', returnclass = "sf")
+map_nl <- canada_map[10,] 
+
+birdsurvey <- fread("Birdsurvey.csv")
+Bubo <- subset(birdsurvey, species == 'Bubo scandiacus')
+Bubo_2011_2021 <- subset(Bubo, year >= 2011 & year <= 2021)
+```
+
+1. Create map with with leaflet()
+2. Add layers (markers, tiles, polygons)
+
+```{r echo = TRUE, message = FALSE, warning=FALSE, results='hide'}
+library(leaflet)
+```
+
+```{r, message = FALSE, warning=FALSE}
+leaflet() %>%
+  addTiles()
+```
+
+
+
+Add the Snowy owl data
+
+
+
+```{r}
+# Other marker types, but circles are the simplest to use
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = Bubo_2011_2021, lng = Bubo_2011_2021$decimalLongitude, lat = Bubo_2011_2021$decimalLatitude) 
+```
+
+
+
+
+Add color palette by year
+
+
+
+```{r}
+year <- colorNumeric("YlGnBu", domain = Bubo_2011_2021$year) 
+
+year <- colorFactor(topo.colors(16), domain = Bubo_2011_2021$year) 
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = Bubo_2011_2021, 
+                   lng = Bubo_2011_2021$decimalLongitude, 
+                   lat = Bubo_2011_2021$decimalLatitude,
+                   fillColor = ~year(year), 
+                   fillOpacity = 0.8,
+                   color = "black",
+                   weight = 1,
+                   radius = 5) %>%
+  addLegend(data = Bubo_2011_2021,
+            pal = year,
+            values = ~year,
+            title = "Year")
+```
+
+
+
+Add Scale bar
+
+
+```{r, warning=FALSE}
+# ---- Mapping: Add Scale Bar ----
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = Bubo_2011_2021, 
+                   lng = Bubo_2011_2021$decimalLongitude, 
+                   lat = Bubo_2011_2021$decimalLatitude,
+                   fillColor = ~year(year), 
+                   fillOpacity = 0.8,
+                   color = "black",
+                   weight = 1,
+                   radius = 5) %>%
+  addLegend(data = Bubo_2011_2021,
+            pal = year,
+            values = ~year,
+            title = "Year") %>%
+  addScaleBar(position = "bottomleft")
+```
+
+```{r, warning=FALSE}
+# ---- Mapping: Add Popups ----
+# Popups appear when you click on a point
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = Bubo_2011_2021, 
+                   lng = Bubo_2011_2021$decimalLongitude, 
+                   lat = Bubo_2011_2021$decimalLatitude,
+                   fillColor = ~year(year),  
+                   fillOpacity = 0.8,
+                   color = "black",
+                   weight = 1,
+                   radius = 5,
+                   popup = ~locality) %>%
+  addLegend(data = Bubo_2011_2021,
+            pal = year,
+            values = ~year,
+            title = "Year") %>%
+  addScaleBar(position = "bottomleft")
+```
+
+```{r, warning = FALSE}
+# ---- Mapping: Add Custom Popups ----
+# Custom pop ups need to be written in html!
+# <b>Hello</b>    b is bold tex Hello, in bold text
+# <br>    br adds a line break
+Bubo_2011_2021 <- Bubo_2011_2021 %>%
+  mutate(mypopup = paste0(locality, "<br>",
+                          "<b>Individual count: </b>", individualCount, "<br>",
+                          "<b>Event date: </b>", eventDate, "<br>"))
+
+# Now specify the popup as the custom popup we just created
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = Bubo_2011_2021, 
+                   lng = Bubo_2011_2021$decimalLongitude, 
+                   lat = Bubo_2011_2021$decimalLatitude,
+                   fillColor = ~year(year), 
+                   fillOpacity = 0.8,
+                   color = "black",
+                   weight = 1,
+                   radius = 5,
+                   popup = ~mypopup) %>%
+  addLegend(data = Bubo_2011_2021,
+            pal = year,
+            values = ~year,
+            title = "Year") %>%
+  addScaleBar(position = "bottomleft")
+```
+
+``` {r} 
+#save it!
+# htmlwidgets::saveWidget(map, "map.html", selfcontained = T)
+```
