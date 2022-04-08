@@ -1,4 +1,4 @@
-# - Data for this manual 
+# Data for this manual 
 
 In this **manual**, we are going to use two types of open access datasets.
 

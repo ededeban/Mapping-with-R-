@@ -23,3 +23,5 @@ introduction
 data-for-this-manual
 install-packages
 load-the-dataset
+import-background-basemap
+load-data-and-packages

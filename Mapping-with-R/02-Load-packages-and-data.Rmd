@@ -1,4 +1,4 @@
-# Load data and packages {#cross}
+# Load data and packages 
 
 This section is to load the packages and extract the data. 
 

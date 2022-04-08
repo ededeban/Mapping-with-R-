@@ -1,0 +1,27 @@
+# Import background basemap 
+
+```{r echo = FALSE, message = FALSE, warning=FALSE, results='hide'}
+#load packages
+libs <- c('ggplot2', "data.table", "dplyr", "cowplot", 
+          "rnaturalearth", "rnaturalearthdata",
+          "ggspatial", "sf")
+lapply(libs, require, character.only = TRUE)
+
+```
+
+Use ```ne_states``` to get provincial/territorial borders from ```rnaturalearth``` package
+```{r}
+canada_map <- ne_states(country = 'canada', returnclass = "sf")
+```
+
+```{r}
+ggplot() + 
+  geom_sf(data = canada_map, colour = "black", 
+          fill = ifelse(canada_map$name == "Newfoundland and Labrador", 
+                        'blue', 'white')) + 
+  coord_sf(crs = "+proj=lcc +lat_1=49 +lat_2=77 +lon_0=-91.52 +x_0=0 +y_0=0 
+           +datum=NAD83 +units=m +no_defs") + 
+  scale_x_continuous(breaks = c(-120, -100, -80, -60)) + 
+  theme_bw() +
+  theme(panel.background = element_rect(fill = "aliceblue"))
+```
