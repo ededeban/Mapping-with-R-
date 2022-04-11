@@ -1,11 +1,12 @@
-# Create interactive map
+# Create interactive map with leaflet package {#interactive}
 
 To learn about leaflet functions: (https://rstudio.github.io/leaflet/)
 
-Utility to interactive maps: 
-- 
-- 
-- 
+## Why interactive maps?: 
+
+- Static maps are useful for creating figures for reports and presentation. Sometimes, however, you want to interact with your data. You can use the leaflet package for R to overlay your data on top of interactive maps. 
+- Leaflet supports various elements for the composition of maps such as Map tiles, Markers, Polygons, Lines, Popups, and GeoJSON.
+- Create a collaborative work, and share the results of your study, in an attractive way. 
 
 ```{r echo = FALSE, message = FALSE, warning=FALSE, results='hide'}
 libs <- c('rnaturalearth', "rnaturalearthdata", "rgeos", "sf", "data.table", "ggplot2", "gganimate", "png", 'leaflet', 'dplyr')
@@ -18,8 +19,7 @@ Bubo <- subset(birdsurvey, species == 'Bubo scandiacus')
 Bubo_2011_2021 <- subset(Bubo, year >= 2011 & year <= 2021)
 ```
 
-1. Create map with with leaflet()
-2. Add layers (markers, tiles, polygons)
+## Add layers (markers, tiles, polygons)
 
 ```{r echo = TRUE, message = FALSE, warning=FALSE, results='hide'}
 library(leaflet)
@@ -30,10 +30,9 @@ leaflet() %>%
   addTiles()
 ```
 
+## Add the Snowy owl data
 
-
-Add the Snowy owl data
-
+- ```addCircleMakers``` function to add the data with x (longitude) and y (latitude) axis. Similar than ```geom_point``` from ```ggplot```.
 
 
 ```{r}
@@ -45,9 +44,14 @@ leaflet() %>%
 ```
 
 
+## Customize Leaflet Maps
+
+You can customize your leaflet map too. Let’s do the following:
 
 
-Add color palette by year
+* Add color palette by year with ```colorNumeric``` and ```colorFactor``` to set the palette (example of palettes:(https://www.datanovia.com/en/fr/blog/top-palettes-de-couleurs-r-a-connaitre-pour-une-meilleur-visualisation-des-donnees/)
+* Adjust the point symbology.
+* Add custom data-driven popups to your map.
 
 
 
@@ -74,7 +78,10 @@ leaflet() %>%
 
 
 
-Add Scale bar
+## Add Scale bar
+
+* To add a scale bar, need function ```addScaleBar```
+
 
 
 ```{r, warning=FALSE}
@@ -96,6 +103,11 @@ leaflet() %>%
   addScaleBar(position = "bottomleft")
 ```
 
+## Add Popups
+
+* To add popups, you need to use **popup** in  ```addCircleMarkers``` and set the colum you want to show in your popup (here the localisation of the birds observed)
+
+
 ```{r, warning=FALSE}
 # ---- Mapping: Add Popups ----
 # Popups appear when you click on a point
@@ -116,6 +128,15 @@ leaflet() %>%
             title = "Year") %>%
   addScaleBar(position = "bottomleft")
 ```
+
+
+## Customize your popup 
+
+
+* To customize your own popup, you need to use html
+- <b>Hello</b>    b is **bold** tex Hello, in bold text
+-  <br>    br adds a line break
+* Then you can specify replace ```popup = ~locality``` with the name of your popup created (here **mypopup**)
 
 ```{r, warning = FALSE}
 # ---- Mapping: Add Custom Popups ----
@@ -145,6 +166,10 @@ leaflet() %>%
             title = "Year") %>%
   addScaleBar(position = "bottomleft")
 ```
+
+
+
+* If you want to save and share your collaborative map, you can use the function ```saveWidget``` from the package ```htmlWidgets```.
 
 ``` {r} 
 #save it!

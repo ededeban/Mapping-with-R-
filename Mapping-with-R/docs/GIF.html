@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Create GIF animation | Making maps for conservation - GIF and interactive maps</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook," />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Create GIF animation | Making maps for conservation - GIF and interactive maps" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook," />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Create GIF animation | Making maps for conservation - GIF and interactive maps" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook," />
+  
+
+<meta name="author" content="Emilie Dedeban" />
+
+
+<meta name="date" content="2022-04-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basemap.html"/>
+<link rel="next" href="interactive.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Making maps for conservation - GIF and interactive maps</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data for this manual<span></span></a></li>
+<li class="chapter" data-level="3" data-path="load-data-and-packages.html"><a href="load-data-and-packages.html"><i class="fa fa-check"></i><b>3</b> Load data and packages<span></span></a><ul>
+<li class="chapter" data-level="3.1" data-path="load-data-and-packages.html"><a href="load-data-and-packages.html#install-packages"><i class="fa fa-check"></i><b>3.1</b> Install packages<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="load-data-and-packages.html"><a href="load-data-and-packages.html#load-the-data"><i class="fa fa-check"></i><b>3.2</b> Load the data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basemap.html"><a href="basemap.html"><i class="fa fa-check"></i><b>4</b> Import background basemap<span></span></a><ul>
+<li class="chapter" data-level="4.1" data-path="basemap.html"><a href="basemap.html#canada-map-and-newfoundland-subset"><i class="fa fa-check"></i><b>4.1</b> Canada map and Newfoundland subset<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="GIF.html"><a href="GIF.html"><i class="fa fa-check"></i><b>5</b> Create GIF animation<span></span></a><ul>
+<li class="chapter" data-level="5.1" data-path="GIF.html"><a href="GIF.html#create-static-map"><i class="fa fa-check"></i><b>5.1</b> Create static map<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="GIF.html"><a href="GIF.html#subset-species-and-period"><i class="fa fa-check"></i><b>5.2</b> Subset species and period<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="GIF.html"><a href="GIF.html#create-gif-by-year"><i class="fa fa-check"></i><b>5.3</b> Create GIF by year<span></span></a></li>
+<li class="chapter" data-level="5.4" data-path="GIF.html"><a href="GIF.html#add-scale-bar-and-north-arrow"><i class="fa fa-check"></i><b>5.4</b> Add scale bar and north arrow<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="interactive.html"><a href="interactive.html"><i class="fa fa-check"></i><b>6</b> Create interactive map with leaflet package<span></span></a><ul>
+<li class="chapter" data-level="6.1" data-path="interactive.html"><a href="interactive.html#why-interactive-maps"><i class="fa fa-check"></i><b>6.1</b> Why interactive maps?:<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="interactive.html"><a href="interactive.html#add-layers-markers-tiles-polygons"><i class="fa fa-check"></i><b>6.2</b> Add layers (markers, tiles, polygons)<span></span></a></li>
+<li class="chapter" data-level="6.3" data-path="interactive.html"><a href="interactive.html#add-the-snowy-owl-data"><i class="fa fa-check"></i><b>6.3</b> Add the Snowy owl data<span></span></a></li>
+<li class="chapter" data-level="6.4" data-path="interactive.html"><a href="interactive.html#customize-leaflet-maps"><i class="fa fa-check"></i><b>6.4</b> Customize Leaflet Maps<span></span></a></li>
+<li class="chapter" data-level="6.5" data-path="interactive.html"><a href="interactive.html#add-scale-bar"><i class="fa fa-check"></i><b>6.5</b> Add Scale bar<span></span></a></li>
+<li class="chapter" data-level="6.6" data-path="interactive.html"><a href="interactive.html#add-popups"><i class="fa fa-check"></i><b>6.6</b> Add Popups<span></span></a></li>
+<li class="chapter" data-level="6.7" data-path="interactive.html"><a href="interactive.html#customize-your-popup"><i class="fa fa-check"></i><b>6.7</b> Customize your popup<span></span></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Making maps for conservation - GIF and interactive maps</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="GIF" class="section level1 hasAnchor">
+<h1><span class="header-section-number">5</span> Create GIF animation<a href="GIF.html#GIF" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="create-static-map" class="section level2 hasAnchor">
+<h2><span class="header-section-number">5.1</span> Create static map<a href="GIF.html#create-static-map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s use the previous script map from NL with zoom on Newfoundland island.
+Before running this, you need to have created <strong>map_nl</strong>, see Import background basemap <a href="https://bookdown.org/ededeban/ConsBioMap/basemap.html">Import background basemap</a></p>
+<p><strong>Add the data on the map</strong></p>
+<ul>
+<li><code>geom_point</code> function to add the data with x (longitude) and y (latitude) axis. The projection of the data needs to be in the same projection than the background map.</li>
+<li><code>coord_sf</code> allow here to set manually the zoom on specific area based on x and y axis limits.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> map_nl, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="co"># We can add an ENTIRELY new data set inside a geom</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> birdsurvey,</a>
+<a class="sourceLine" id="cb13-6" title="6">             <span class="kw">aes</span>(<span class="dt">x =</span> decimalLongitude,</a>
+<a class="sourceLine" id="cb13-7" title="7">                 <span class="dt">y =</span> decimalLatitude),</a>
+<a class="sourceLine" id="cb13-8" title="8">             <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
+<a class="sourceLine" id="cb13-9" title="9">             <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb13-11" title="11">    <span class="dt">title =</span> <span class="st">&quot;Bird survey between 2002 and 2021&quot;</span></a>
+<a class="sourceLine" id="cb13-12" title="12">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-14" title="14"><span class="st">  </span><span class="co"># Zoom in to a specific view</span></a>
+<a class="sourceLine" id="cb13-15" title="15"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">60</span>, <span class="dv">-52</span>), </a>
+<a class="sourceLine" id="cb13-16" title="16">           <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">46</span>, <span class="dv">52</span>))</a></code></pre></div>
+<p><img src="ConsBioMap_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="subset-species-and-period" class="section level2 hasAnchor">
+<h2><span class="header-section-number">5.2</span> Subset species and period<a href="GIF.html#subset-species-and-period" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Bubo scandiacus</em></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">Bubo &lt;-<span class="st"> </span><span class="kw">subset</span>(birdsurvey, species <span class="op">==</span><span class="st"> &#39;Bubo scandiacus&#39;</span>)</a>
+<a class="sourceLine" id="cb14-2" title="2">Bubo_<span class="dv">2011</span>_<span class="dv">2021</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(Bubo, year <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2011</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2021</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co">### Plot Bubo distribution only</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> map_nl, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="st">  </span><span class="co"># We can add an ENTIRELY new data set inside a geom</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> Bubo_<span class="dv">2011</span>_<span class="dv">2021</span>,</a>
+<a class="sourceLine" id="cb15-7" title="7">             <span class="kw">aes</span>(<span class="dt">x =</span> decimalLongitude,</a>
+<a class="sourceLine" id="cb15-8" title="8">                 <span class="dt">y =</span> decimalLatitude),</a>
+<a class="sourceLine" id="cb15-9" title="9">             <span class="dt">alpha =</span> <span class="fl">0.8</span>,</a>
+<a class="sourceLine" id="cb15-10" title="10">             <span class="dt">size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb15-11" title="11">             <span class="dt">colour =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-12" title="12"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb15-13" title="13">    <span class="dt">title =</span> <span class="st">&quot;Snowy owl survey between 2011 and 2021&quot;</span></a>
+<a class="sourceLine" id="cb15-14" title="14">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-15" title="15"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-16" title="16"><span class="st">  </span><span class="co"># Zoom in to a specific view</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">60</span>, <span class="dv">-52</span>), </a>
+<a class="sourceLine" id="cb15-18" title="18">           <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">46</span>, <span class="dv">52</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb15-19" title="19"><span class="st">           </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="ConsBioMap_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="create-gif-by-year" class="section level2 hasAnchor">
+<h2><span class="header-section-number">5.3</span> Create GIF by year<a href="GIF.html#create-gif-by-year" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Set the map for the GIF</strong>
+Here the main difference with a static plot is the function <code>transition_time</code> from the package <code>gganimate</code>. This function allow to set which column we want to use to get one image by period (here, by year).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co">### Create a ggplot + add specific gganimate function = transition_time </span></a>
+<a class="sourceLine" id="cb16-2" title="2">plot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>()  <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> map_nl, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span><span class="co"># We can add an ENTIRELY new data set inside a geom</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> Bubo,</a>
+<a class="sourceLine" id="cb16-6" title="6">             <span class="kw">aes</span>(<span class="dt">x =</span> decimalLongitude,</a>
+<a class="sourceLine" id="cb16-7" title="7">                 <span class="dt">y =</span> decimalLatitude,</a>
+<a class="sourceLine" id="cb16-8" title="8">                 <span class="dt">color =</span> <span class="kw">as.factor</span>(year)),</a>
+<a class="sourceLine" id="cb16-9" title="9">             <span class="dt">alpha =</span> <span class="fl">0.8</span>,</a>
+<a class="sourceLine" id="cb16-10" title="10">             <span class="dt">size =</span> <span class="fl">3.5</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="st">  </span><span class="kw">transition_time</span>(year) <span class="op">+</span><span class="st"> </span><span class="co">#### this will allow us to get one image of data by year</span></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb16-13" title="13">    <span class="dt">title =</span> <span class="st">&quot;Bird survey between 2002 and 2021&quot;</span></a>
+<a class="sourceLine" id="cb16-14" title="14">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-15" title="15"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-16" title="16"><span class="st">  </span><span class="co"># Zoom in to a specific view</span></a>
+<a class="sourceLine" id="cb16-17" title="17"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">60</span>, <span class="dv">-52</span>), </a>
+<a class="sourceLine" id="cb16-18" title="18">           <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">46</span>, <span class="dv">52</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-19" title="19"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Year: {frame_time}&quot;</span>) </a></code></pre></div>
+</div>
+<div id="add-scale-bar-and-north-arrow" class="section level2 hasAnchor">
+<h2><span class="header-section-number">5.4</span> Add scale bar and north arrow<a href="GIF.html#add-scale-bar-and-north-arrow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A map always needs scale and north arrow. Here we separately set the function to add the two layers to the map previously created before (plot1)</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co">##### Add scale bar and north arrow</span></a>
+<a class="sourceLine" id="cb17-2" title="2">plot1 &lt;-<span class="st"> </span>plot1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="st">  </span><span class="kw">annotation_scale</span>(<span class="dt">location =</span> <span class="st">&quot;tl&quot;</span>, <span class="dt">width_hint =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="st">  </span><span class="kw">annotation_north_arrow</span>(<span class="dt">location =</span> <span class="st">&quot;tr&quot;</span>, <span class="dt">which_north =</span> <span class="st">&quot;true&quot;</span>, </a>
+<a class="sourceLine" id="cb17-5" title="5">                         <span class="dt">height =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>), <span class="dt">width =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>),</a>
+<a class="sourceLine" id="cb17-6" title="6">                         <span class="dt">pad_x =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;cm&quot;</span>), <span class="dt">pad_y =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;cm&quot;</span>),</a>
+<a class="sourceLine" id="cb17-7" title="7">                         <span class="dt">style =</span> north_arrow_fancy_orienteering) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;aliceblue&quot;</span>),</a>
+<a class="sourceLine" id="cb17-10" title="10">        <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) </a></code></pre></div>
+<p><strong>Create the GIF</strong></p>
+<ul>
+<li>The function <code>animate</code> from the package <code>gganimate</code> is the function use to create the GIF output. There is different options to set. Here we use only the options: <code>nframes</code> and <code>duration</code> to define the number of frames per second (one frame per year (10 years of survey) for 15 seconds of animation).</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co">######  This part will create the gif </span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="kw">animate</span>(plot1, <span class="dt">nframes =</span> <span class="dv">10</span>, <span class="dt">duration =</span> <span class="dv">15</span>) <span class="co">### nframes = is the number of frames/images we want (here, one by year = 10 years) /  duration is the duration of the gif, here 15 secondes</span></a></code></pre></div>
+<p><img src="ConsBioMap_files/figure-html/unnamed-chunk-16-1.gif" /><!-- --></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basemap.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interactive.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-Create-GIF-animation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["ConsBioMap.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -19,7 +19,8 @@ bibliography:
 
 Creating a map has many benefits. Firstly, it allows to get information that is not visible or difficult to understand in a table. Secondly, it makes the subject more interesting. With the development of mapping tools, it is now possible to make animated map, or even collaborative. In this manual you will learn how to make a GIF and a collaborative map. These types of tools are essential assets for presentations, but also for discussions with collaborators. In the field of conservation, the use of maps allows to answer questions about human-wildlife conflict, but also to understand the distribution of animal and plant species, to better protect them.
 
-The following code will allow to:
+The following code will allow to: \linebreak 
+
 * create a map with the ```sf``` package \linebreak 
 
 * import data from an open access dataset \linebreak 

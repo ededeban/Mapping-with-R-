@@ -1,4 +1,6 @@
-delete_merged_file: true
+book_filename: "ConsBioMap"
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: ""
+delete_merged_file: true
+output_dir: "docs" 

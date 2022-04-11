@@ -33,21 +33,23 @@ lapply(libs, require, character.only = TRUE)
 
 ```
 
-## Load the dataset
+## Load the data
 
 ```{r}
 birdsurvey <- fread("Birdsurvey.csv")
 
 ```
 
-Check if we have the right period from 2011 to 2021
+**Check if we have the right period from 2011 to 2021**
+
 ```{r}
 min(birdsurvey$year)
 max(birdsurvey$year)
 
 ```
 
-Check the number of species and the type of species
+**Check the number of species and the type of species**
+
 ```{r}
 uniqueN(birdsurvey$species)
 unique(birdsurvey$species)

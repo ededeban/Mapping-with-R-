@@ -1,4 +1,4 @@
-# Import background basemap 
+# Import background basemap {#basemap}
 
 ```{r echo = FALSE, message = FALSE, warning=FALSE, results='hide'}
 #load packages
@@ -10,11 +10,17 @@ lapply(libs, require, character.only = TRUE)
 ```
 
 Use ```ne_states``` to get provincial/territorial borders from ```rnaturalearth``` package
+
 ```{r}
 canada_map <- ne_states(country = 'canada', returnclass = "sf")
 ```
 
-Plot of canada map
+## Canada map and Newfoundland subset
+
+- ```geom_sf``` function here allow to open the naturalearth map polygon. Inside this function, ```fill = ifelse ()``` allow to identify with a specific color the Newfoundland and Labrador region.
+- ```coord_sf``` allow here to set the projection of our choice.
+- ```scale_x_continuous``` allow to manually set the breaks of the x-axis.
+
 ```{r}
 can_map <- ggplot() + 
   geom_sf(data = canada_map, colour = "black", 
@@ -29,7 +35,7 @@ can_map
 ```
 
 
-Subset the map to Newfoundland part (need for next part of the manual):
+**Subset the map to Newfoundland part (need for next part of the manual):**
 
 ```{r}
 map_nl <- canada_map[10,] 

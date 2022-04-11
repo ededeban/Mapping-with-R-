@@ -1,9 +1,9 @@
-# Create GIF animation  
+# Create GIF animation  {#GIF}
 
-**1) Create static map** 
+## Create static map
 
-Let's use the previous script map from NL with zoom on Newfoundland island
-Before running this, you need to have created "map_nl", see Import background basemap [Import background basemap](link)
+Let's use the previous script map from NL with zoom on Newfoundland island.
+Before running this, you need to have created **map_nl**, see Import background basemap [Import background basemap](https://bookdown.org/ededeban/ConsBioMap/basemap.html)
 
 ```{r echo = FALSE, message = FALSE, warning=FALSE, results='hide'}
 libs <- c('ggplot2', "data.table", "dplyr", "cowplot", 
@@ -16,6 +16,11 @@ map_nl <- canada_map[10,]
 birdsurvey <- fread("Birdsurvey.csv")
 ```
 
+
+**Add the data on the map**
+
+- ```geom_point``` function to add the data with x (longitude) and y (latitude) axis. The projection of the data needs to be in the same projection than the background map.
+- ```coord_sf``` allow here to set manually the zoom on specific area based on x and y axis limits.
 
 
 ```{r, message = FALSE, warning=FALSE}
@@ -37,9 +42,10 @@ ggplot() +
            ylim = c(46, 52))
 ```
 
-**2) Subset species and period** 
+## Subset species and period 
 
 *Bubo scandiacus*
+
 
 ```{r}
 Bubo <- subset(birdsurvey, species == 'Bubo scandiacus')
@@ -68,7 +74,10 @@ ggplot() +
            theme_bw()
 ```
            
-**2) Create GIF by year**
+## Create GIF by year ##
+
+**Set the map for the GIF**
+Here the main difference with a static plot is the function ```transition_time``` from the package ```gganimate```. This function allow to set which column we want to use to get one image by period (here, by year).
 
 ```{r}
 ### Create a ggplot + add specific gganimate function = transition_time 
@@ -92,6 +101,10 @@ plot1 <- ggplot()  +
   labs(title = "Year: {frame_time}") 
 ```
 
+## Add scale bar and north arrow ##
+
+A map always needs scale and north arrow. Here we separately set the function to add the two layers to the map previously created before (plot1)
+
 ```{r}
 ##### Add scale bar and north arrow
 plot1 <- plot1 +
@@ -104,6 +117,11 @@ plot1 <- plot1 +
   theme(panel.background = element_rect(fill = "aliceblue"),
         legend.position = "none") 
 ```
+
+
+**Create the GIF**
+
+- The function ```animate``` from the package ```gganimate``` is the function use to create the GIF output. There is different options to set. Here we use only the options: ```nframes``` and ```duration``` to define the number of frames per second (one frame per year (10 years of survey) for 15 seconds of animation). 
 
 ```{r, message = FALSE, warning=FALSE}
 ######  This part will create the gif 
